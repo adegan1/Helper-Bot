@@ -11,6 +11,10 @@ public class Lever : MonoBehaviour, IInteractable
 
     public GameObject target;
 
+    public AudioSource audioSource;
+    public AudioClip leverOnSFX;
+    public AudioClip leverOffSFX;
+
     private void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
@@ -22,8 +26,6 @@ public class Lever : MonoBehaviour, IInteractable
     {
         isOn = !isOn; // toggle state
         UpdateLeverVisual();
-
-        Debug.Log($"Lever toggled! New state: {isOn}");
 
         // You can trigger any function you want here
         if (isOn)
@@ -40,14 +42,17 @@ public class Lever : MonoBehaviour, IInteractable
 
     private void ActivateMechanism()
     {
-        // Example: activate bridge, open door, power machine
-        Debug.Log("Mechanism activated!");
+        audioSource.clip = leverOnSFX;
+        audioSource.Play();
+
         target.SetActive(true);
     }
 
     private void DeactivateMechanism()
     {
-        Debug.Log("Mechanism deactivated!");
+        audioSource.clip = leverOffSFX;
+        audioSource.Play();
+
         target.SetActive(false);
     }
 }

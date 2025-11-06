@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class CompanionAI : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class CompanionAI : MonoBehaviour
 
     private Rigidbody2D rb;
     private bool canMove = true;
+    private bool paused = false;
     private bool isGrounded;
     private bool groundAhead;
     private bool wallAhead;
@@ -21,6 +23,8 @@ public class CompanionAI : MonoBehaviour
     private Transform forwardCliffCheck;
     private Transform forwardWallCheck;
     public float forwardCheckDistance = 0.3f;
+
+    public float flipDelay;
 
     void Awake()
     {
@@ -52,7 +56,7 @@ public class CompanionAI : MonoBehaviour
 
         isGrounded = groundedNow;
 
-        if (canMove)
+        if (canMove && !paused)
             if (forward) {
                 rb.linearVelocity = new Vector2(moveSpeed, rb.linearVelocity.y);
             } else {
@@ -73,10 +77,10 @@ public class CompanionAI : MonoBehaviour
 
             // Flip if running into a wall or cliff
             if (!groundAhead) {
-                Flip();
+                StartCoroutine(DelayActionFlip(flipDelay));
             }
             else if (wallAhead) {
-                Flip();
+                StartCoroutine(DelayActionFlip(flipDelay));
             }
         } else {
             canMove = false;
@@ -87,12 +91,25 @@ public class CompanionAI : MonoBehaviour
     {
         forward = !forward;
 
-        if (forward) {
+        if (forward)
+        {
             forwardCliffCheck = cliffCheckFront;
             forwardWallCheck = wallCheckFront;
-        } else {
+        }
+        else
+        {
             forwardCliffCheck = cliffCheckBack;
             forwardWallCheck = wallCheckBack;
         }
+    }
+    
+    IEnumerator DelayActionFlip(float delayTime)
+    {
+        Flip();
+        paused = true;
+
+        // Wait for the specified delay time before continuing.
+        yield return new WaitForSeconds(delayTime);
+        paused = false;
     }
 }

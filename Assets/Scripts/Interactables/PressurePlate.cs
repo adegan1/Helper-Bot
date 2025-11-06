@@ -14,6 +14,13 @@ public class PressurePlate : MonoBehaviour, IInteractable
     public GameObject target;
     public bool invertActivation;
 
+    public AudioSource audioSource;
+    public AudioClip buttonOnSFX;
+    public AudioClip buttonOffSFX;
+
+    public bool oneTime;
+    private int pressAmount = 0;
+
     private void Awake()
     {
         col = GetComponent<BoxCollider2D>();
@@ -23,34 +30,45 @@ public class PressurePlate : MonoBehaviour, IInteractable
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // Check if the object can activate the plate
-        if (((1 << other.gameObject.layer) & activatorMask) != 0)
+        if (pressAmount < 1 || !oneTime)
         {
-            if (!isPressed)
+            // Check if the object can activate the plate
+            if (((1 << other.gameObject.layer) & activatorMask) != 0)
             {
-                isPressed = true;
-                Press();
+                pressAmount++;
+
+                if (!isPressed)
+                {
+                    isPressed = true;
+                    Press();
+                }
             }
         }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (((1 << other.gameObject.layer) & activatorMask) != 0)
+        if (pressAmount < 1 || !oneTime)
         {
-            if (isPressed)
+            if (((1 << other.gameObject.layer) & activatorMask) != 0)
             {
-                isPressed = false;
-                Release();
+                if (isPressed)
+                {
+                    isPressed = false;
+                    Release();
+                }
             }
         }
     }
 
     private void Press()
     {
+        // Play sound
+        audioSource.clip = buttonOnSFX;
+        audioSource.Play();
+
         // Visually move the plate down a bit
         transform.localPosition = originalPosition - new Vector3(0, depressAmount, 0);
-        Debug.Log($"{name} pressed!");
 
         // Optionally trigger something
         Interact();
@@ -58,8 +76,12 @@ public class PressurePlate : MonoBehaviour, IInteractable
 
     private void Release()
     {
+        // Play sound
+        audioSource.clip = buttonOffSFX;
+        audioSource.Play();
+
+        // Return button size
         transform.localPosition = originalPosition;
-        Debug.Log($"{name} released!");
 
         if (target)
         {

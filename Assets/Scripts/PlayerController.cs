@@ -17,6 +17,10 @@ public class PlayerController : MonoBehaviour
     private Vector2 moveInput;
     private bool isGrounded;
 
+    public GameObject inputIcon;
+    public AudioSource audioSource;
+    public AudioClip jumpSFX;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -41,7 +45,13 @@ public class PlayerController : MonoBehaviour
     public void OnJump(InputAction.CallbackContext context)
     {
         if (isGrounded)
+        {
+            // Play sound
+            audioSource.clip = jumpSFX;
+            audioSource.Play();
+
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        }
     }
 
     public void RestartScene(InputAction.CallbackContext context)
@@ -54,5 +64,22 @@ public class PlayerController : MonoBehaviour
         if (groundCheck == null) return;
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(groundCheck.position, groundRadius);
+    }
+
+    // Show input icon
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Interactable"))
+        {
+            inputIcon.SetActive(true);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Interactable"))
+        {
+            inputIcon.SetActive(false);
+        }
     }
 }
