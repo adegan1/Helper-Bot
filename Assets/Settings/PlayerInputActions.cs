@@ -129,7 +129,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Exit"",
+                    ""name"": ""Menu"",
                     ""type"": ""Button"",
                     ""id"": ""1a57ec2c-6298-4cab-a538-273edcc43398"",
                     ""expectedControlType"": """",
@@ -234,7 +234,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Exit"",
+                    ""action"": ""Menu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -249,7 +249,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_Reset = m_Player.FindAction("Reset", throwIfNotFound: true);
-        m_Player_Exit = m_Player.FindAction("Exit", throwIfNotFound: true);
+        m_Player_Menu = m_Player.FindAction("Menu", throwIfNotFound: true);
     }
 
     ~@PlayerInputActions()
@@ -334,7 +334,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_Reset;
-    private readonly InputAction m_Player_Exit;
+    private readonly InputAction m_Player_Menu;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -363,9 +363,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @Reset => m_Wrapper.m_Player_Reset;
         /// <summary>
-        /// Provides access to the underlying input action "Player/Exit".
+        /// Provides access to the underlying input action "Player/Menu".
         /// </summary>
-        public InputAction @Exit => m_Wrapper.m_Player_Exit;
+        public InputAction @Menu => m_Wrapper.m_Player_Menu;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -404,9 +404,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Reset.started += instance.OnReset;
             @Reset.performed += instance.OnReset;
             @Reset.canceled += instance.OnReset;
-            @Exit.started += instance.OnExit;
-            @Exit.performed += instance.OnExit;
-            @Exit.canceled += instance.OnExit;
+            @Menu.started += instance.OnMenu;
+            @Menu.performed += instance.OnMenu;
+            @Menu.canceled += instance.OnMenu;
         }
 
         /// <summary>
@@ -430,9 +430,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Reset.started -= instance.OnReset;
             @Reset.performed -= instance.OnReset;
             @Reset.canceled -= instance.OnReset;
-            @Exit.started -= instance.OnExit;
-            @Exit.performed -= instance.OnExit;
-            @Exit.canceled -= instance.OnExit;
+            @Menu.started -= instance.OnMenu;
+            @Menu.performed -= instance.OnMenu;
+            @Menu.canceled -= instance.OnMenu;
         }
 
         /// <summary>
@@ -502,11 +502,11 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnReset(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "Exit" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "Menu" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnExit(InputAction.CallbackContext context);
+        void OnMenu(InputAction.CallbackContext context);
     }
 }

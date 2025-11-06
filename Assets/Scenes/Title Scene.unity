@@ -798,7 +798,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHandler
   titleTextObject: {fileID: 1283476750}
-  titleText: Title
+  titleText: Parallel Protocol
   newText: N/A
 --- !u!114 &548704222
 MonoBehaviour:
@@ -1814,7 +1814,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHandler
   titleTextObject: {fileID: 1283476750}
-  titleText: Title
+  titleText: Parallel Protocol
   newText: Controls
 --- !u!1 &1132434140
 GameObject:
@@ -1963,7 +1963,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHandler
   titleTextObject: {fileID: 1283476750}
-  titleText: Title
+  titleText: Parallel Protocol
   newText: N/A
 --- !u!1 &1216840889
 GameObject:
@@ -2100,9 +2100,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Title
-
-'
+  m_text: Parallel Protocol
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 344a5a7cacd3b2247a186eff5f331cac, type: 2}
   m_sharedMaterial: {fileID: 6453496468307306758, guid: 344a5a7cacd3b2247a186eff5f331cac, type: 2}
@@ -2137,7 +2135,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 1
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -2328,7 +2326,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHandler
   titleTextObject: {fileID: 1283476750}
-  titleText: Title
+  titleText: Parallel Protocol
   newText: N/A
 --- !u!1 &1291478092
 GameObject:
@@ -3197,7 +3195,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHandler
   titleTextObject: {fileID: 1283476750}
-  titleText: Title
+  titleText: Parallel Protocol
   newText: Credits
 --- !u!1 &1696624542
 GameObject:
@@ -3330,7 +3328,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHandler
   titleTextObject: {fileID: 1283476750}
-  titleText: Title
+  titleText: Parallel Protocol
   newText: N/A
 --- !u!114 &1886273788
 MonoBehaviour:
@@ -3498,10 +3496,14 @@ MonoBehaviour:
     [E]
 
 
-    Instructions:
+    Restart:
 
-    Utilize
-    buttons and levers to assist your buddy to the goal!'
+    [R]
+
+
+    Menu:
+
+    [Escape]'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 344a5a7cacd3b2247a186eff5f331cac, type: 2}
   m_sharedMaterial: {fileID: 6453496468307306758, guid: 344a5a7cacd3b2247a186eff5f331cac, type: 2}

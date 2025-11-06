@@ -1,10 +1,13 @@
 using UnityEngine;
+using System.Collections;
 
 public class MovingPlatform : MonoBehaviour
 {
     public Transform pointA;
     public Transform pointB;
     public float moveSpeed = 2f;
+    public float stopTime;
+    private bool moving = true;
 
     private Vector3 nextPosition;
 
@@ -15,11 +18,15 @@ public class MovingPlatform : MonoBehaviour
 
     void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, nextPosition, moveSpeed * Time.deltaTime);
+        if (moving)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, nextPosition, moveSpeed * Time.deltaTime);
+        }
 
         if (transform.position == nextPosition)
         {
             nextPosition = (nextPosition == pointA.position) ? pointB.position : pointA.position;
+            StartCoroutine(DelayAction(stopTime));
         }
     }
 
@@ -38,5 +45,14 @@ public class MovingPlatform : MonoBehaviour
         {
             col.gameObject.transform.parent = null;
         }
+    }
+
+    IEnumerator DelayAction(float delayTime)
+    {
+        moving = false;
+
+        // Wait for the specified delay time before continuing.
+        yield return new WaitForSeconds(delayTime);
+        moving = true;
     }
 }
